@@ -15,6 +15,14 @@ export class EmpleadosController {
             throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         })
     }
+    @Get('api/get/empleados/:id')
+    getEmpleado(@Param('id') id){
+        return this.empleadosService.finById(id).then(res=>{
+            return {success: true, data: res}
+        }).catch(error=>{
+            throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        })
+    }
     @Post('api/post/empleados')
     save(@Body() empleado:Empleados){
         return this.empleadosService.create(empleado).then(res=>{
